@@ -2053,24 +2053,12 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
       </div>
     </div>
 
-    <!-- STEP 4: acompanhante + presença -->
+    <!-- STEP 4: pessoas vinculadas ao convite -->
     <div id="s4" hidden>
-      <div id="acompBox" class="acomp-box">
-        <p class="acomp-label">Acompanhante no convite</p>
-        <p class="acomp-nome" id="acompNome"></p>
-        <div class="radios-sm">
-          <label class="rf-radio"><input type="radio" name="ac" value="sim" checked> Vem junto</label>
-          <label class="rf-radio"><input type="radio" name="ac" value="nao"> Não vem</label>
-        </div>
-      </div>
-
-      <hr class="divider">
-      <p class="plabel">Confirmo minha presença</p>
-      <div class="radios">
-        <label class="rf-radio"><input type="radio" name="p" value="sim" checked> Sim</label>
-        <label class="rf-radio"><input type="radio" name="p" value="nao"> Não</label>
-      </div>
-      <button class="btn-enviar" onclick="enviar()">Enviar confirmação</button>
+      <p class="plabel">Confirme a presença de cada pessoa</p>
+      <div id="guestResponses"></div>
+      <p class="hint" id="hintEnviar"></p>
+      <button class="btn-enviar" id="btnEnviar" onclick="enviar()">Enviar confirmação</button>
     </div>
 
     <!-- Sucesso -->
@@ -2683,16 +2671,10 @@ if(rsvpSubmit){
 </script>
 
 <script>
-const lista = [
-  { telefone: '21986361743', nome: 'Ritta de Cássia Barcellos Sobral', acompanhante: 'Guilherme Gonçalves Pinto' },
-  { telefone: '21987654321', nome: 'Buanna Rosa', acompanhante: 'Daniel Boechat' },
-  { telefone: '21988776655', nome: 'Ana Paula Ferreira', acompanhante: 'Carlos Eduardo' },
-  { telefone: '21989998888', nome: 'Marcos Vinicius Santos', acompanhante: null },
-];
-
 let nomeDigitado = '';
 let teleDigitado = '';
 let found = null;
+let sessionToken = '';
 
 function onNomeDigitado(){
   nomeDigitado = document.getElementById('nomeInput').value.trim();
@@ -2731,15 +2713,30 @@ function formatarTelefone(){
   }
 }
 
-function validarTelefone(){
-  const convidado = lista.find(c => c.telefone === teleDigitado);
-  if(convidado){
-    found = convidado;
-    document.getElementById('nomeEncontrado').textContent = convidado.nome;
+async function validarTelefone(){
+  const btn = document.getElementById('btnValidarTele');
+  const hint = document.getElementById('hintTele');
+  btn.disabled = true;
+  btn.textContent = 'Validando...';
+  hint.textContent = '';
+  try {
+    const response = await fetch('/api/rsvp/lookup', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: nomeDigitado, phone: teleDigitado})
+    });
+    const data = await response.json();
+    if(!response.ok || !data.ok) throw new Error(data.message || 'Não foi possível validar os dados informados.');
+    found = data.invitation;
+    sessionToken = data.sessionToken;
+    document.getElementById('nomeEncontrado').textContent = found.displayName;
     document.getElementById('s2').hidden = true;
     document.getElementById('s3').hidden = false;
-  } else {
-    document.getElementById('hintTele').textContent = 'Telefone não encontrado. Verifique o número.';
+  } catch(error) {
+    hint.textContent = error.message || 'Não foi possível validar os dados informados.';
+  } finally {
+    btn.disabled = teleDigitado.length !== 11;
+    btn.textContent = 'Validar';
   }
 }
 
@@ -2752,12 +2749,7 @@ function voltarParaNome(){
 function confirmar(sim){
   if(sim){
     document.getElementById('s3').hidden = true;
-    if(found.acompanhante){
-      document.getElementById('acompNome').textContent = found.acompanhante;
-      document.getElementById('acompBox').hidden = false;
-    } else {
-      document.getElementById('acompBox').hidden = true;
-    }
+    renderGuestResponses();
     document.getElementById('s4').hidden = false;
   } else {
     voltarParaTelefone();
@@ -2770,14 +2762,62 @@ function voltarParaTelefone(){
   document.getElementById('teleInput').focus();
 }
 
-function enviar(){
-  const presenca = document.querySelector('input[name="p"]:checked').value;
-  document.getElementById('s4').hidden = true;
-  const primeiro = found.nome.split(' ')[0];
-  document.getElementById('okMsg').innerHTML = presenca === 'sim'
-    ? `Presença confirmada! ✦<br><span style="font-size:16px;opacity:.75">Até novembro, ${primeiro}!</span>`
-    : `Agradecemos o retorno.<br><span style="font-size:16px;opacity:.75">Sentiremos sua falta, ${primeiro}.</span>`;
-  document.getElementById('s5').hidden = false;
+function renderGuestResponses(){
+  const container = document.getElementById('guestResponses');
+  container.innerHTML = '';
+  found.guests.forEach((guest, index) => {
+    const current = guest.response && guest.response.attending;
+    const box = document.createElement('div');
+    box.className = 'acomp-box';
+    box.innerHTML = `<p class="acomp-label">${index === 0 ? 'Convidado' : 'Pessoa no convite'}</p>
+      <p class="acomp-nome"></p>
+      <div class="radios-sm">
+        <label class="rf-radio"><input type="radio" name="guest-${guest.id}" value="sim" ${current === true ? 'checked' : ''}> Confirmar</label>
+        <label class="rf-radio"><input type="radio" name="guest-${guest.id}" value="nao" ${current === false ? 'checked' : ''}> Não comparece</label>
+      </div>`;
+    box.querySelector('.acomp-nome').textContent = guest.name;
+    container.appendChild(box);
+  });
+}
+
+async function enviar(){
+  const hint = document.getElementById('hintEnviar');
+  const btn = document.getElementById('btnEnviar');
+  const responses = found.guests.map(guest => {
+    const selected = document.querySelector(`input[name="guest-${guest.id}"]:checked`);
+    return selected ? {guestId: guest.id, attending: selected.value === 'sim'} : null;
+  });
+  if(responses.some(item => item === null)){
+    hint.textContent = 'Escolha uma opção para cada pessoa do convite.';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  hint.textContent = '';
+  try {
+    const response = await fetch('/api/rsvp/response', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionToken}`,
+        'Idempotency-Key': crypto.randomUUID()
+      },
+      body: JSON.stringify({responses})
+    });
+    const data = await response.json();
+    if(!response.ok || !data.ok) throw new Error(data.message || 'Não foi possível registrar a confirmação.');
+    document.getElementById('s4').hidden = true;
+    const primeiro = found.guests[0].name.split(' ')[0];
+    const alguemVai = responses.some(item => item.attending);
+    document.getElementById('okMsg').innerHTML = alguemVai
+      ? `Presença confirmada! ✦<br><span style="font-size:16px;opacity:.75">Até novembro, ${primeiro}!</span>`
+      : `Agradecemos o retorno.<br><span style="font-size:16px;opacity:.75">Sentiremos sua falta, ${primeiro}.</span>`;
+    document.getElementById('s5').hidden = false;
+  } catch(error) {
+    hint.textContent = error.message || 'Não foi possível registrar a confirmação.';
+    btn.disabled = false;
+    btn.textContent = 'Enviar confirmação';
+  }
 }
 </script>
 
