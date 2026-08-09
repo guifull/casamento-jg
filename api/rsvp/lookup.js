@@ -20,10 +20,16 @@ module.exports = async function handler(req, res) {
       return json(res, 400, { ok: false, message: GENERIC_ERROR });
     }
 
-    const ipHash = hashValue(ip, process.env.PHONE_HASH_SECRET);
+    const ipHash = hashValue(`rate:ip:${ip}`, process.env.PHONE_HASH_SECRET);
     const phoneHash = hashValue(phone, process.env.PHONE_HASH_SECRET);
-    const rate = await rpc('consume_rsvp_rate_limit', { p_key_hash: ipHash, p_limit: 8, p_window_seconds: 900 });
-    if (rate !== true) return json(res, 429, { ok: false, message: 'Aguarde alguns minutos e tente novamente.' });
+    const phoneRateHash = hashValue(`rate:phone:${phone}`, process.env.PHONE_HASH_SECRET);
+    const [ipAllowed, phoneAllowed] = await Promise.all([
+      rpc('consume_rsvp_rate_limit', { p_key_hash: ipHash, p_limit: 8, p_window_seconds: 900 }),
+      rpc('consume_rsvp_rate_limit', { p_key_hash: phoneRateHash, p_limit: 5, p_window_seconds: 900 }),
+    ]);
+    if (ipAllowed !== true || phoneAllowed !== true) {
+      return json(res, 429, { ok: false, message: 'Aguarde alguns minutos e tente novamente.' });
+    }
 
     const select = encodeURIComponent('invitation_id,invitation:invitations(id,display_name,status,guests(id,full_name,guest_type,display_order,active,rsvp_responses(attending,responded_at,updated_at)))');
     const rows = await supabase(`invitation_contacts?phone_hash=eq.${phoneHash}&select=${select}&limit=1`);
@@ -58,4 +64,3 @@ module.exports = async function handler(req, res) {
     return json(res, 500, { ok: false, message: 'Serviço temporariamente indisponível.' });
   }
 };
-
