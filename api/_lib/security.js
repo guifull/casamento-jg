@@ -54,5 +54,10 @@ function verifySession(token, secret) {
   }
 }
 
-module.exports = { hashValue, normalizeName, normalizePhone, signSession, verifySession };
+function safeEqual(left, right) {
+  const leftBuffer = Buffer.from(String(left || ''), 'utf8');
+  const rightBuffer = Buffer.from(String(right || ''), 'utf8');
+  return leftBuffer.length === rightBuffer.length && crypto.timingSafeEqual(leftBuffer, rightBuffer);
+}
 
+module.exports = { hashValue, normalizeName, normalizePhone, safeEqual, signSession, verifySession };

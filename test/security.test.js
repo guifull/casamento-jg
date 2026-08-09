@@ -4,6 +4,7 @@ const {
   hashValue,
   normalizeName,
   normalizePhone,
+  safeEqual,
   signSession,
   verifySession,
 } = require('../api/_lib/security');
@@ -30,4 +31,10 @@ test('token válido é aceito e adulteração é rejeitada', () => {
   assert.equal(verifySession(token, 'segredo-de-teste').invitationId, 'convite-1');
   assert.equal(verifySession(`${token}x`, 'segredo-de-teste'), null);
   assert.equal(verifySession(token, 'outro-segredo'), null);
+});
+
+test('comparação segura aceita somente valores idênticos', () => {
+  assert.equal(safeEqual('senha-forte', 'senha-forte'), true);
+  assert.equal(safeEqual('senha-forte', 'senha-errada'), false);
+  assert.equal(safeEqual('curta', 'uma-senha-maior'), false);
 });
