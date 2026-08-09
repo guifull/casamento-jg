@@ -1,0 +1,12 @@
+{
+  "name": "casamento-jg",
+  "private": true,
+  "version": "54.0.0",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+
