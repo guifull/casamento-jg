@@ -1,0 +1,12 @@
+PACOTE ATUAL DO SITE JULIA E GUILHERME
+
+Origem: versão 54 do projeto publicado no ChatGPT Sites.
+
+Para publicar:
+1. Extraia o arquivo ZIP.
+2. Envie todo o conteúdo da pasta ao repositório GitHub casamento-jg.
+3. O arquivo index.html deve permanecer na raiz do repositório.
+4. Mantenha todos os arquivos PNG junto ao index.html.
+5. A Vercel conectada ao repositório deverá publicar automaticamente.
+
+Não substitua este index.html pelo arquivo antigo “julia-e-guilherme-novo - 07.08.html”.
