@@ -57,11 +57,22 @@ begin
       values (target_id, item_name, item_type, item_order);
     else
       update public.guests set full_name = item_name, guest_type = item_type,
-        display_order = item_order, updated_at = now()
+        display_order = item_order, active = true, updated_at = now()
       where id = item_id and invitation_id = target_id;
       if not found then raise exception 'guest not found'; end if;
     end if;
   end loop;
+  if p_invitation_id is not null then
+    update public.guests
+      set active = false, updated_at = now()
+      where invitation_id = target_id
+        and active
+        and id not in (
+          select (entry->>'id')::uuid
+          from jsonb_array_elements(p_guests) entry
+          where coalesce(entry->>'id', '') <> ''
+        );
+  end if;
   return target_id;
 end;
 $$;
