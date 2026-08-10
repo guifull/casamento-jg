@@ -1,5 +1,5 @@
 const { clientIp, json, readJson, setCors } = require('../_lib/http');
-const { hashValue, normalizeName, normalizePhone, signSession } = require('../_lib/security');
+const { hashValue, normalizePhone, signSession } = require('../_lib/security');
 const { rpc, supabase } = require('../_lib/supabase');
 const { verifyTurnstile } = require('../_lib/turnstile');
 
@@ -12,10 +12,9 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = await readJson(req);
-    const name = normalizeName(body.name);
     const phone = normalizePhone(body.phone);
     const ip = clientIp(req);
-    if (name.length < 3 || !phone) return json(res, 400, { ok: false, message: GENERIC_ERROR });
+    if (!phone) return json(res, 400, { ok: false, message: GENERIC_ERROR });
     if (!(await verifyTurnstile(body.turnstileToken, ip))) {
       return json(res, 400, { ok: false, message: GENERIC_ERROR });
     }
@@ -35,11 +34,7 @@ module.exports = async function handler(req, res) {
     const rows = await supabase(`invitation_contacts?phone_hash=eq.${phoneHash}&select=${select}&limit=1`);
     const invitation = rows?.[0]?.invitation;
     const guests = (invitation?.guests || []).filter((guest) => guest.active);
-    const nameMatches = guests.some((guest) => {
-      const registered = normalizeName(guest.full_name);
-      return registered === name || registered.includes(name) || name.includes(registered);
-    });
-    if (!invitation || invitation.status !== 'active' || !nameMatches) {
+    if (!invitation || invitation.status !== 'active') {
       return json(res, 404, { ok: false, message: GENERIC_ERROR });
     }
 
