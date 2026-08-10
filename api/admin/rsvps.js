@@ -1,6 +1,7 @@
 const { adminSession } = require('../_lib/admin');
 const { json, setCors } = require('../_lib/http');
 const { supabase } = require('../_lib/supabase');
+const { decryptPhone } = require('../_lib/phone-crypto');
 
 module.exports = async function handler(req, res) {
   setCors(req, res);
@@ -8,12 +9,13 @@ module.exports = async function handler(req, res) {
   if (!adminSession(req)) return json(res, 401, { ok: false, message: 'Acesso não autorizado.' });
 
   try {
-    const select = encodeURIComponent('id,display_name,status,guests(id,full_name,guest_type,display_order,active,rsvp_responses(attending,responded_at,updated_at,revision_number))');
+    const select = encodeURIComponent('id,display_name,status,invitation_contacts(id,phone_encrypted,is_primary),guests(id,full_name,guest_type,display_order,active,rsvp_responses(attending,responded_at,updated_at,revision_number))');
     const invitations = await supabase(`invitations?select=${select}&order=display_name.asc`);
     const rows = (invitations || []).map((invitation) => ({
       id: invitation.id,
       name: invitation.display_name,
       status: invitation.status,
+      phone: decryptPhone((invitation.invitation_contacts || []).find((contact) => contact.is_primary)?.phone_encrypted),
       guests: (invitation.guests || [])
         .filter((guest) => guest.active)
         .sort((a, b) => a.display_order - b.display_order)

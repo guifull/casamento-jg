@@ -1,5 +1,8 @@
 param([Parameter(Mandatory=$true)][string]$Path)
 
+[Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
+$OutputEncoding = [Text.UTF8Encoding]::new($false)
+
 $report = (& "$PSScriptRoot\analyze-guest-xlsx.ps1" -Summary -Path $Path | ConvertFrom-Json)
 $culture = [Globalization.CultureInfo]::GetCultureInfo('pt-BR')
 $particles = @('da','das','de','do','dos','e')

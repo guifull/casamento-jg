@@ -8,6 +8,7 @@ const {
   signSession,
   verifySession,
 } = require('../api/_lib/security');
+const { decryptPhone, encryptPhone } = require('../api/_lib/phone-crypto');
 
 test('normaliza telefone brasileiro com ou sem código do país', () => {
   assert.equal(normalizePhone('(21) 98636-1743'), '21986361743');
@@ -37,4 +38,12 @@ test('comparação segura aceita somente valores idênticos', () => {
   assert.equal(safeEqual('senha-forte', 'senha-forte'), true);
   assert.equal(safeEqual('senha-forte', 'senha-errada'), false);
   assert.equal(safeEqual('curta', 'uma-senha-maior'), false);
+});
+
+test('telefone criptografado pode ser recuperado somente com a chave correta', () => {
+  const key = Buffer.alloc(32, 7);
+  const encrypted = encryptPhone('21999990000', key);
+  assert.equal(decryptPhone(encrypted, key), '21999990000');
+  assert.equal(decryptPhone(encrypted, Buffer.alloc(32, 8)), null);
+  assert.ok(!encrypted.includes('21999990000'));
 });
