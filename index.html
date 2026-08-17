@@ -139,6 +139,12 @@ a{color:inherit}
 .prog-card p{margin-bottom:1em}
 .prog-card .nota{font-size:15px;color:var(--tinta-suave);font-style:italic}
 .prog-card hr{border:none;border-top:1px solid rgba(51,83,74,.22);width:56px;margin:22px auto}
+.traje-bloco{margin-top:2px}
+.traje-titulo{font-family:'EB Garamond',Georgia,serif;font-size:13px;font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:var(--tinta-suave);margin:0 0 22px}
+.traje-orientacoes{max-width:480px;margin:0 auto;text-align:center}
+.traje-orientacoes p{margin:0 0 16px}
+.traje-orientacoes b{display:block;font-size:10px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--tinta-suave);margin-bottom:6px}
+.traje-orientacoes span{display:block;font-size:15px;font-style:italic;color:var(--tinta-suave);line-height:1.65}
 .prog-card .art-casal{width:min(180px,52%);margin:26px auto 0}
 .prog-card .art-casal img{width:100%;height:auto;display:block;object-fit:contain}
 .local-ilustracao{width:min(360px,68%);margin:26px auto 22px;position:relative}
@@ -422,10 +428,14 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
     </div>
     <hr>
     <p class="nota">Para maior conforto, sugerimos transporte por aplicativo.</p>
-    <p><b>Cerimônia:</b> 15h00</p>
     <hr>
-    <p class="nota">Para as mulheres: Vestidos longos, saltos são bem-vindos. Apenas evitem os mais finos.</p>
-    <p class="nota">Para os homens: Terno, camisa e sapatos sociais. Uso de gravata opcional.</p>
+    <div class="traje-bloco">
+      <h3 class="traje-titulo">Traje</h3>
+      <div class="traje-orientacoes">
+        <p><b>Mulheres</b><span>Vestidos longos e saltos são bem-vindos. Apenas evitem os saltos mais finos.</span></p>
+        <p><b>Homens</b><span>Terno, camisa e sapatos sociais. Uso de gravata opcional.</span></p>
+      </div>
+    </div>
     <div class="art-casal"><img src="/trajes.png" alt="Sugestão de traje para os convidados"></div>
 </div>
 </section>
