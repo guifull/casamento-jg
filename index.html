@@ -103,6 +103,11 @@ a{color:inherit}
 .carta-comparacao{padding-top:clamp(60px,8vw,100px)}
 .carta-frame-nova{aspect-ratio:1055/1491}
 .carta-manuscrita-nova{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain}
+@media(min-width:801px){
+  .carta-comparacao{max-width:none;padding:0}
+  .carta-frame-nova{width:100%;max-width:none;aspect-ratio:3/2}
+  .carta-manuscrita-nova{object-fit:cover}
+}
 @media(max-width:800px){.carta-frame{max-width:560px}}
 @media(max-width:520px){.carta-frame{width:100%;max-width:430px}}
 
@@ -377,7 +382,10 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 <div class="paper-parallax" id="paperParallax">
 <section class="carta carta-comparacao reveal">
   <div class="carta-frame carta-frame-nova">
-    <img class="carta-manuscrita-nova" src="/carta-julia-e-guile-v2.jpeg" alt="Nova versão da mensagem manuscrita de Julia e Guilherme">
+    <picture>
+      <source media="(min-width: 801px)" srcset="/carta-desktop.jpeg">
+      <img class="carta-manuscrita-nova" src="/carta-julia-e-guile-v2.jpeg" alt="Mensagem manuscrita de Julia e Guilherme">
+    </picture>
   </div>
 </section>
 
