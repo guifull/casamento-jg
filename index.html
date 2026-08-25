@@ -155,6 +155,13 @@ a{color:inherit}
 .local-ilustracao img{width:100%;height:auto;display:block}
 .transporte-ilustracao{width:min(400px,76%);margin:26px auto 20px}
 .transporte-ilustracao img{width:100%;height:auto;display:block}
+.programa-info-visual{display:none;position:relative;max-width:1536px;margin:20px auto 0;line-height:0}
+.programa-info-visual>img{display:block;width:100%;height:auto}
+.programa-info-link{position:absolute;top:73%;height:10%;z-index:2;border-radius:50%;transition:background .2s,box-shadow .2s}
+.programa-info-link:hover,.programa-info-link:focus-visible{background:rgba(94,103,75,.08);box-shadow:0 0 0 1px rgba(94,103,75,.28);outline:none}
+.programa-info-link.uber{left:20.8%;width:5.5%}
+.programa-info-link.maps{left:26.3%;width:5.5%}
+@media(min-width:801px){.programa-info-atual{display:none}.programa-info-visual{display:block}}
 @media(max-width:600px){.local-ilustracao{width:80%;margin:22px auto 18px}}
 
 
@@ -433,6 +440,7 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
     <div class="recepcao-nota">
       <p>cocktails, reception and dancing to follow</p>
     </div>
+    <div class="programa-info-atual">
     <figure class="transporte-ilustracao"><img src="/taxinovo.png" alt="Ilustração de trajeto com táxi"></figure>
     <hr>
     <p class="nota" style="margin-bottom:14px">Como chegar</p>
@@ -451,7 +459,13 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
       </div>
     </div>
     <div class="art-casal"><img src="/trajes.png" alt="Sugestão de traje para os convidados"></div>
+    </div>
 </div>
+  <div class="programa-info-visual reveal">
+    <img src="/como-chegar-traje-social.png" alt="Informações sobre transporte e traje social">
+    <a class="programa-info-link uber" href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=-22.9466&dropoff[longitude]=-43.1334&dropoff[nickname]=Espa%C3%A7o%20Barcelona%2C%20Niter%C3%B3i" target="_blank" rel="noopener" aria-label="Abrir trajeto no Uber" title="Abrir no Uber"></a>
+    <a class="programa-info-link maps" href="https://www.google.com/maps/dir/?api=1&destination=Estrada+Leopoldo+Froes,+166+B,+Niterói,+RJ" target="_blank" rel="noopener" aria-label="Abrir trajeto no Google Maps" title="Abrir no Google Maps"></a>
+  </div>
 </section>
 
 <section class="rsvp reveal" id="rsvp" style="background-image:url('/rsvp-bg-verde.png') !important;background-repeat:repeat !important;background-size:249px 220px !important;background-color:#5E674B !important">
