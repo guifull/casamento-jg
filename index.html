@@ -198,10 +198,11 @@ a{color:inherit}
 .rsvp-barco{width:min(320px,70%);margin:36px auto 0;opacity:.8}
 
 /* PRESENTES */
-.presentes{background:#EDDDCE;color:#5D664B;text-align:center;padding:clamp(60px,8vw,100px) 24px}
+.presentes{background:#EDDDCE;color:#5D664B;text-align:center;padding:clamp(60px,8vw,100px) 24px;display:flex;flex-direction:column;align-items:center}
 .presentes h2{font-size:clamp(22px,3.4vw,30px);letter-spacing:.32em;text-transform:uppercase;margin-bottom:22px}
-.presentes .art-flor{width:min(204px,48vw);aspect-ratio:3/2;margin:28px auto 0;opacity:.95;background:url('/presen.png') center/contain no-repeat}
+.presentes .art-flor{order:1;width:min(204px,48vw);aspect-ratio:3/2;margin:28px auto 0;opacity:.95;background:url('/presen.png') center/contain no-repeat}
 .presentes .art-flor img{display:none!important}
+.presentes .btn{order:2;margin-top:28px}
 
 .btn{display:inline-block;padding:13px 36px;border:1px solid currentColor;text-decoration:none;
   font-size:11px;letter-spacing:.3em;text-transform:uppercase;transition:background .28s,color .28s;
