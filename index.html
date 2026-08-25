@@ -177,6 +177,8 @@ a{color:inherit}
 .rsvp h2{text-align:center;font-size:clamp(24px,4vw,34px);letter-spacing:.3em;text-transform:uppercase;margin-bottom:14px}
 .rsvp .lead{max-width:400px;margin:0 auto 34px;text-align:center;font-size:17px;color:rgba(231,227,211,.88)}
 .rsvp .cta{display:block;width:fit-content;margin:0 auto;position:relative;z-index:2}
+.rsvp-barco{width:min(400px,76%);aspect-ratio:3/2;margin:36px auto 0;opacity:.9;background:url('/barco-verde.png') center/contain no-repeat}
+.rsvp-barco svg{display:none!important}
 
 /* PRESENTES */
 .presentes{background:#EDDDCE;color:#5D664B;text-align:center;padding:clamp(60px,8vw,100px) 24px}
@@ -455,7 +457,7 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 </div>
 </section>
 
-<section class="rsvp reveal" id="rsvp" style="background-image:url('/rsvp-bg.png') !important;background-repeat:repeat !important;background-size:330px 225px !important;background-color:#4B5442 !important">
+<section class="rsvp reveal" id="rsvp" style="background-image:url('/rsvp-bg-verde.png') !important;background-repeat:repeat !important;background-size:249px 220px !important;background-color:#5E674B !important">
   <h2>R.S.V.P</h2>
   
   <style>
@@ -466,7 +468,7 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 .rsvp input[type=text],.rsvp input[type=tel]{width:100%;padding:12px 0;background:transparent;border:none;border-bottom:1px solid rgba(231,227,211,.5);color:#E7E3D3;-webkit-text-fill-color:#E7E3D3;caret-color:#E7E3D3;font-family:'EB Garamond',Georgia,serif;font-size:18px;outline:none;transition:border-color .3s;border-radius:0}
 .rsvp input[type=text]::placeholder,.rsvp input[type=tel]::placeholder{color:rgba(231,227,211,.4);-webkit-text-fill-color:rgba(231,227,211,.4);font-style:italic}
 .rsvp input[type=text]:focus,.rsvp input[type=tel]:focus{border-bottom-color:#E7E3D3}
-.rsvp input:-webkit-autofill,.rsvp input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 1000px #4B5442 inset;-webkit-text-fill-color:#E7E3D3}
+ .rsvp input:-webkit-autofill,.rsvp input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 1000px #5E674B inset;-webkit-text-fill-color:#E7E3D3}
 .rsvp .hint{font-size:13px;font-style:italic;color:rgba(231,227,211,.5);margin-top:6px;min-height:20px}
 .rsvp .card{padding:16px 20px;border:1px solid rgba(231,227,211,.3);background:rgba(231,227,211,.07);margin:20px 0;animation:fadeUp .4s ease}
 .rsvp .card-label{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(231,227,211,.6);margin-bottom:6px}
@@ -545,7 +547,7 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
   </div>
 
   <!-- Veleiro -->
-  <div style="width:min(320px,70%);margin:36px auto 0;opacity:.8"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1000" style="width:100%;height:auto;display:block">
+  <div class="rsvp-barco"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1000" style="width:100%;height:auto;display:block">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1000" style="width:100%;height:auto;display:block">
 
 <g>
