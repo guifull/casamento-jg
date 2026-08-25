@@ -157,22 +157,23 @@ a{color:inherit}
 .transporte-ilustracao img{width:100%;height:auto;display:block}
 .programa-info-atual{display:none}
 .programa-info-visual{width:min(94vw,1500px);margin:28px auto 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(36px,4vw,64px)}
-.info-card{position:relative;isolation:isolate;aspect-ratio:2/3;padding:30% 14% 14%;display:flex;flex-direction:column;align-items:center;text-align:center;color:var(--tinta);background:transparent}
+.info-card{position:relative;isolation:isolate;aspect-ratio:5/8;text-align:center;color:var(--tinta);background:transparent}
 .info-card::before{content:'';position:absolute;z-index:-1;inset:0;background:url('/moldura-info.png') center/100% 100% no-repeat;pointer-events:none}
-.info-card h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.2vw,42px);font-weight:400;line-height:1.1;letter-spacing:.22em;text-transform:uppercase;margin:0;min-height:1.2em;white-space:nowrap}
-.info-card:first-child h2{margin-top:14%}
-.info-card .taxi-art{width:30%;height:auto;margin:8% auto 7%;object-fit:contain}
-.info-card .traje-art{width:44%;height:31%;margin:4% auto 0;object-fit:contain}
-.info-card .info-texto{font-family:'EB Garamond',serif;font-size:clamp(18px,1.5vw,23px);line-height:1.55;margin:0;max-width:500px}
-.info-links{width:100%;margin-top:14%;display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-.info-links::before{content:'Clique aqui';flex-basis:100%;font-size:10px;letter-spacing:.26em;text-transform:uppercase;margin-bottom:-4px}
-.info-links a{display:inline-flex;align-items:center;gap:7px;padding:6px 4px;border:0;border-bottom:1px solid transparent;font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:border-color .2s,opacity .2s}
-.info-links a:hover,.info-links a:focus-visible{border-bottom-color:currentColor;opacity:.72;outline:none}
-.info-links svg{width:16px;height:16px}
-.traje-detalhes{margin-top:auto;margin-bottom:3%;width:100%}
+.info-card h2{position:absolute;left:8%;right:8%;font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.2vw,42px);font-weight:400;line-height:1.1;letter-spacing:.22em;text-transform:uppercase;margin:0;white-space:nowrap}
+.info-card:first-child h2{top:30%}
+.info-card:nth-child(2) h2{top:18%}
+.info-card .taxi-art{position:absolute;top:40%;left:36%;width:28%;height:12%;object-fit:contain}
+.info-card .traje-art{position:absolute;top:25%;left:31%;width:38%;height:31%;object-fit:contain}
+.info-card .info-texto{position:absolute;top:53%;left:12%;right:12%;font-family:'EB Garamond',serif;font-size:clamp(18px,1.5vw,23px);line-height:1.55;margin:0}
+.info-links{position:absolute;top:71%;left:20%;right:20%;display:flex;justify-content:center;align-items:flex-start;gap:28px;flex-wrap:wrap}
+.info-links::before{content:'Clique aqui';flex-basis:100%;font-size:10px;letter-spacing:.26em;text-transform:uppercase;margin-bottom:-5px}
+.info-links a{display:block;width:48px;height:48px;border:0;text-decoration:none;transition:transform .2s,opacity .2s}
+.info-links a:hover,.info-links a:focus-visible{transform:translateY(-2px);opacity:.75;outline:none}
+.info-links img{width:100%;height:100%;display:block;object-fit:contain}
+.traje-detalhes{position:absolute;top:59%;left:8%;right:8%;width:auto}
 .traje-detalhes p{margin:0 0 18px;font-size:clamp(17px,1.35vw,21px);line-height:1.45}
 .traje-detalhes b{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(20px,1.8vw,26px);font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-bottom:5px}
-@media(max-width:800px){.programa-info-visual{width:min(100%,500px);grid-template-columns:1fr;gap:22px}.info-card{padding:30% 14% 14%}.info-card h2{font-size:clamp(23px,7vw,32px);letter-spacing:.2em}.info-card:first-child h2{margin-top:12%}.info-card .info-texto{font-size:clamp(14px,4vw,18px)}.info-links{margin-top:10%;gap:14px}.traje-detalhes p{font-size:clamp(14px,3.8vw,17px);margin-bottom:12px}.traje-detalhes b{font-size:clamp(17px,5vw,21px)}}
+@media(max-width:800px){.programa-info-visual{width:min(100%,500px);grid-template-columns:1fr;gap:22px}.info-card h2{font-size:clamp(23px,7vw,32px);letter-spacing:.2em}.info-card .info-texto{font-size:clamp(14px,4vw,18px)}.info-links{gap:20px}.info-links a{width:42px;height:42px}.traje-detalhes p{font-size:clamp(14px,3.8vw,17px);margin-bottom:12px}.traje-detalhes b{font-size:clamp(17px,5vw,21px)}}
 @media(max-width:600px){.local-ilustracao{width:80%;margin:22px auto 18px}}
 
 
@@ -476,10 +477,10 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
     <article class="info-card">
       <h2>Como chegar</h2>
       <img class="taxi-art" src="/taxi-relevo.png" alt="Táxi em relevo">
-      <p class="info-texto">Para seu maior conforto e tranquilidade, sugerimos o uso de táxi, aplicativos ou serviços de transporte.</p>
+      <p class="info-texto">Para seu maior conforto<br>e tranquilidade sugerimos o uso<br>de táxi, aplicativos ou serviços de transporte.</p>
       <div class="info-links">
-        <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=-22.9466&dropoff[longitude]=-43.1334&dropoff[nickname]=Espa%C3%A7o%20Barcelona%2C%20Niter%C3%B3i" target="_blank" rel="noopener" aria-label="Abrir trajeto no Uber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="10" width="20" height="8" rx="2"/><path d="M5 10V8a2 2 0 012-2h10a2 2 0 012 2v2"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg>Uber</a>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Estrada+Leopoldo+Froes,+166+B,+Niterói,+RJ" target="_blank" rel="noopener" aria-label="Abrir trajeto no Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.686 2 6 4.686 6 8c0 5.25 6 12 6 12s6-6.75 6-12c0-3.314-2.686-6-6-6z"/><circle cx="12" cy="8" r="2"/></svg>Google Maps</a>
+        <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=-22.9466&dropoff[longitude]=-43.1334&dropoff[nickname]=Espa%C3%A7o%20Barcelona%2C%20Niter%C3%B3i" target="_blank" rel="noopener" aria-label="Abrir trajeto no Uber"><img src="/icone-uber-relevo.png" alt=""></a>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Estrada+Leopoldo+Froes,+166+B,+Niterói,+RJ" target="_blank" rel="noopener" aria-label="Abrir trajeto no Google Maps"><img src="/icone-maps-relevo.png" alt=""></a>
       </div>
     </article>
     <article class="info-card">
