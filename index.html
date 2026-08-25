@@ -156,21 +156,23 @@ a{color:inherit}
 .transporte-ilustracao{width:min(400px,76%);margin:26px auto 20px}
 .transporte-ilustracao img{width:100%;height:auto;display:block}
 .programa-info-atual{display:none}
-.programa-info-visual{max-width:1120px;margin:28px auto 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,3vw,42px)}
-.info-card{position:relative;isolation:isolate;aspect-ratio:3/4;padding:27% 13% 10%;display:flex;flex-direction:column;align-items:center;text-align:center;color:var(--tinta);background:#EDDDCD}
+.programa-info-visual{max-width:1240px;margin:28px auto 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,44px)}
+.info-card{position:relative;isolation:isolate;aspect-ratio:2/3;padding:22% 14% 9%;display:flex;flex-direction:column;align-items:center;text-align:center;color:var(--tinta);background:transparent}
 .info-card::before{content:'';position:absolute;z-index:-1;inset:0;background:url('/moldura-info.png') center/100% 100% no-repeat;pointer-events:none}
-.info-card h2{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,3.4vw,32px);font-weight:400;line-height:1.1;letter-spacing:.28em;text-transform:uppercase;margin:0;min-height:1.2em}
-.info-card .taxi-art{width:72%;height:22%;margin:5% auto 2%;object-fit:contain}
-.info-card .traje-art{width:30%;height:28%;margin:4% auto 1%;object-fit:contain}
-.info-card .info-texto{font-family:'EB Garamond',serif;font-size:clamp(15px,1.45vw,20px);line-height:1.55;margin:0;max-width:410px}
-.info-links{margin-top:auto;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.info-links a{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid rgba(58,74,67,.35);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s}
-.info-links a:hover,.info-links a:focus-visible{background:#5E674B;color:#EDDDCD;outline:none}
+.info-card h2{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:400;line-height:1.1;letter-spacing:.24em;text-transform:uppercase;margin:0;min-height:1.2em;white-space:nowrap}
+.info-card:first-child h2{margin-top:8%}
+.info-card .taxi-art{width:38%;height:auto;margin:9% auto 8%;object-fit:contain}
+.info-card .traje-art{width:39%;height:35%;margin:5% auto 0;object-fit:contain}
+.info-card .info-texto{font-family:'EB Garamond',serif;font-size:clamp(15px,1.35vw,19px);line-height:1.55;margin:0;max-width:390px}
+.info-links{width:100%;margin-top:auto;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.info-links::before{content:'Clique aqui';flex-basis:100%;font-size:10px;letter-spacing:.26em;text-transform:uppercase;margin-bottom:-4px}
+.info-links a{display:inline-flex;align-items:center;gap:6px;padding:6px 4px;border:0;border-bottom:1px solid transparent;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:border-color .2s,opacity .2s}
+.info-links a:hover,.info-links a:focus-visible{border-bottom-color:currentColor;opacity:.72;outline:none}
 .info-links svg{width:16px;height:16px}
-.traje-detalhes{margin-top:auto;width:100%}
+.traje-detalhes{margin-top:auto;margin-bottom:2%;width:100%}
 .traje-detalhes p{margin:0 0 14px;font-size:clamp(14px,1.25vw,18px);line-height:1.45}
 .traje-detalhes b{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.7vw,22px);font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-bottom:4px}
-@media(max-width:800px){.programa-info-visual{width:min(100%,520px);grid-template-columns:1fr;gap:22px}.info-card{padding:27% 12% 10%}}
+@media(max-width:800px){.programa-info-visual{width:min(100%,500px);grid-template-columns:1fr;gap:22px}.info-card{padding:22% 14% 9%}.info-card h2{font-size:clamp(23px,7vw,32px);letter-spacing:.2em}.info-card .info-texto{font-size:clamp(14px,4vw,18px)}}
 @media(max-width:600px){.local-ilustracao{width:80%;margin:22px auto 18px}}
 
 
@@ -473,7 +475,7 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
   <div class="programa-info-visual reveal">
     <article class="info-card">
       <h2>Como chegar</h2>
-      <img class="taxi-art" src="/taxinovo.png" alt="Táxi em relevo">
+      <img class="taxi-art" src="/taxi-relevo.png" alt="Táxi em relevo">
       <p class="info-texto">Para seu maior conforto e tranquilidade, sugerimos o uso de táxi, aplicativos ou serviços de transporte.</p>
       <div class="info-links">
         <a href="https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=-22.9466&dropoff[longitude]=-43.1334&dropoff[nickname]=Espa%C3%A7o%20Barcelona%2C%20Niter%C3%B3i" target="_blank" rel="noopener" aria-label="Abrir trajeto no Uber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="10" width="20" height="8" rx="2"/><path d="M5 10V8a2 2 0 012-2h10a2 2 0 012 2v2"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg>Uber</a>
