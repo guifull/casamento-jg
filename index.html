@@ -127,9 +127,9 @@ a{color:inherit}
 
 /* PROGRAMAÇÃO */
 .prog{padding:clamp(60px,8vw,100px) 24px;background:#EDDDCD}
-.prog-card{max-width:660px;margin:0 auto;text-align:center;border:1px solid rgba(51,83,74,.4);
+.prog-card{max-width:660px;margin:0 auto;text-align:center;border:none;
   padding:clamp(40px,6vw,68px) clamp(22px,5vw,60px);position:relative;background:#EDDDCD}
-.prog-card::after{content:'';position:absolute;inset:8px;border:1px solid rgba(51,83,74,.16);pointer-events:none}
+.prog-card::after{display:none}
 .prog-card .ev{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--tinta-suave);margin-bottom:10px}
 .prog-card h2{font-size:clamp(23px,3.4vw,32px);font-weight:400;letter-spacing:.28em;text-transform:uppercase;margin:8px 0 12px}
 .prog-card .art-passaros{width:min(336px,70.4%);margin:0 auto 18px}
@@ -139,8 +139,7 @@ a{color:inherit}
 .prog-card .local span{display:block;font-size:13px;letter-spacing:.12em;line-height:1.7}
 .prog-card .local{margin-bottom:18px}
 .recepcao-nota{margin:18px auto 24px;text-align:center}
-.recepcao-nota img{display:block;width:82px;height:auto;margin:0 auto 12px}
-.recepcao-nota p{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--tinta-suave);line-height:1.7;margin:0}
+.recepcao-nota p{font-family:'Italianno',cursive;font-size:clamp(27px,3.5vw,34px);font-weight:400;letter-spacing:0;text-transform:none;color:var(--tinta-suave);line-height:1.25;margin:0}
 .prog-card p{margin-bottom:1em}
 .prog-card .nota{font-size:15px;color:var(--tinta-suave);font-style:italic}
 .prog-card hr{border:none;border-top:1px solid rgba(51,83,74,.22);width:56px;margin:22px auto}
@@ -156,7 +155,7 @@ a{color:inherit}
 .local-ilustracao img{width:100%;height:auto;display:block}
 .transporte-ilustracao{width:min(400px,76%);margin:26px auto 20px}
 .transporte-ilustracao img{width:100%;height:auto;display:block}
-@media(max-width:600px){.local-ilustracao{width:80%;margin:22px auto 18px}.recepcao-nota p{font-size:9px;letter-spacing:.2em}}
+@media(max-width:600px){.local-ilustracao{width:80%;margin:22px auto 18px}}
 
 
 .foto-sep{line-height:0;display:block;margin:0;padding:0}
@@ -432,7 +431,6 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
     <p class="hora">15h00</p>
     <p class="local"><b>Espaço Barcelona</b><span>Estrada Leopoldo Froes, 166 B – Niterói, RJ</span></p>
     <div class="recepcao-nota">
-      <img src="/arvore.png" alt="Árvore ornamental em relevo">
       <p>cocktails, reception and dancing to follow</p>
     </div>
     <figure class="transporte-ilustracao"><img src="/taxinovo.png" alt="Ilustração de trajeto com táxi"></figure>
