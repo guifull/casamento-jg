@@ -988,10 +988,13 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 </footer>
 
 <script>
-// Mantém o primeiro carrossel no fim do site, antes do rodapé.
+// Organiza as seções finais na ordem definida para a experiência do convite.
 (function(){
+  var presentes = document.querySelector('#presentes');
+  var rsvp = document.querySelector('#rsvp');
   var carouselFinal = document.querySelector('.foto-retrato');
   var footer = document.querySelector('.footer');
+  if(presentes && rsvp) rsvp.parentNode.insertBefore(presentes, rsvp);
   if(carouselFinal && footer) footer.parentNode.insertBefore(carouselFinal, footer);
 })();
 
