@@ -990,16 +990,15 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 </footer>
 
 <script>
-// Organiza as seções finais na ordem definida para a experiência do convite.
+// Organiza as seções finais e remove o segundo carrossel desativado.
 (function(){
   var presentes = document.querySelector('#presentes');
   var rsvp = document.querySelector('#rsvp');
   var fotoAposRsvp = rsvp && rsvp.nextElementSibling;
   var carouselFinal = document.querySelector('.foto-retrato');
-  var footer = document.querySelector('.footer');
   if(presentes && rsvp) rsvp.parentNode.insertBefore(presentes, rsvp);
   if(fotoAposRsvp && fotoAposRsvp.classList.contains('foto-destaque')) rsvp.parentNode.insertBefore(fotoAposRsvp, rsvp);
-  if(carouselFinal && footer) footer.parentNode.insertBefore(carouselFinal, footer);
+  if(carouselFinal) carouselFinal.remove();
 })();
 
 // No mobile, o menu nasce integrado ao hero e assume o papel claro ao rolar.
@@ -1073,11 +1072,13 @@ document.querySelectorAll('a[href^="#"]').forEach(function(link){
 
 
 (function(){
-  var imgs = Array.from(document.querySelectorAll('.carousel-track img'));
+  var track = document.querySelector('.carousel-track');
+  if(!track) return;
+
+  var imgs = Array.from(track.querySelectorAll('img'));
   var dots  = document.querySelectorAll('.carousel-dots span');
   var n = imgs.length, cur = 0, timer = null, isAnimating = false;
 
-  var track = document.querySelector('.carousel-track');
   var first = imgs[0].cloneNode();
   var last  = imgs[n-1].cloneNode();
   track.appendChild(first);
