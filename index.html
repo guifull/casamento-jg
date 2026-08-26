@@ -994,9 +994,11 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 (function(){
   var presentes = document.querySelector('#presentes');
   var rsvp = document.querySelector('#rsvp');
+  var fotoAposRsvp = rsvp && rsvp.nextElementSibling;
   var carouselFinal = document.querySelector('.foto-retrato');
   var footer = document.querySelector('.footer');
   if(presentes && rsvp) rsvp.parentNode.insertBefore(presentes, rsvp);
+  if(fotoAposRsvp && fotoAposRsvp.classList.contains('foto-destaque')) rsvp.parentNode.insertBefore(fotoAposRsvp, rsvp);
   if(carouselFinal && footer) footer.parentNode.insertBefore(carouselFinal, footer);
 })();
 
