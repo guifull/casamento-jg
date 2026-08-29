@@ -173,6 +173,13 @@ a{color:inherit}
 .traje-detalhes{position:absolute;top:57%;left:8%;right:8%;width:auto}
 .traje-detalhes p{margin:0 0 16px;font-size:clamp(15px,1.15vw,18px);line-height:1.45}
 .traje-detalhes b{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(18px,1.5vw,22px);font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-bottom:5px}
+@media(min-width:801px){
+  .info-card:first-child h2,.info-card:nth-child(2) h2{top:21%}
+  .info-card .taxi-art{top:31%;left:36%;width:28%;height:14%}
+  .info-card .traje-art{top:30%;left:37.25%;width:25.5%;height:21.25%}
+  .info-card .info-texto{top:53%}
+  .traje-detalhes{top:53%}
+}
 @media(max-width:800px){.programa-info-visual{width:min(100%,500px);grid-template-columns:1fr;gap:22px}.info-card h2{font-size:clamp(23px,3.4vw,32px);letter-spacing:.28em}.info-card .info-texto{font-size:clamp(14px,4vw,18px)}.info-links{gap:20px}.info-links a{width:74px;height:74px}.traje-detalhes p{font-size:clamp(14px,3.8vw,17px);margin-bottom:12px}.traje-detalhes b{font-size:clamp(17px,5vw,21px)}}
 @media(max-width:600px){.local-ilustracao{width:64%;margin:22px auto 18px}}
 
