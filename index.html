@@ -216,16 +216,16 @@ a{color:inherit}
 .presentes .btn{order:2;margin-top:28px}
 
 /* CONTATO */
-.contato{background:#EDDDCE;color:#5D664B;text-align:center;padding:clamp(60px,8vw,100px) 24px}
-.contato h2{font-size:clamp(22px,3.4vw,30px);letter-spacing:.32em;text-transform:uppercase;margin-bottom:30px}
-.contato-intro{max-width:610px;margin:0 auto 42px;font-size:clamp(17px,2.2vw,20px);line-height:1.65}
-.contato-whatsapp{display:flex;align-items:center;justify-content:center;width:92px;height:92px;margin:0 auto 30px;color:#F3E5D7;text-decoration:none;transition:transform .25s ease,filter .25s ease;filter:drop-shadow(1px 3px 2px rgba(93,102,75,.28))}
-.contato-whatsapp img{width:82px;height:82px;display:block;object-fit:contain}
+.contato{background:#EDDDCE;color:#5D664B;text-align:center;padding:clamp(28px,3.5vw,44px) 24px}
+.contato h2{font-size:clamp(20px,2.5vw,27px);letter-spacing:.32em;text-transform:uppercase;margin-bottom:14px}
+.contato-intro{max-width:610px;margin:0 auto 16px;font-size:clamp(15px,1.7vw,18px);line-height:1.45}
+.contato-whatsapp{display:flex;align-items:center;justify-content:center;width:58px;height:58px;margin:0 auto 14px;color:#F3E5D7;text-decoration:none;transition:transform .25s ease,filter .25s ease;filter:drop-shadow(1px 3px 2px rgba(93,102,75,.28))}
+.contato-whatsapp img{width:52px;height:52px;display:block;object-fit:contain}
 .contato-whatsapp:hover{transform:translateY(-2px) scale(1.04);filter:drop-shadow(0 4px 3px rgba(93,102,75,.32))}
 .contato-whatsapp:focus-visible{outline:1px solid #5D664B;outline-offset:7px;border-radius:50%}
-.contato-nome{font-size:clamp(19px,2.8vw,25px);letter-spacing:.22em;text-transform:uppercase;margin-bottom:12px}
-.contato-funcao{font-size:18px;margin-bottom:8px}
-.contato-telefone{display:inline-block;color:inherit;text-decoration:none;font-size:20px;letter-spacing:.04em}
+.contato-nome{font-size:clamp(18px,2.2vw,23px);letter-spacing:.22em;text-transform:uppercase;margin-bottom:6px}
+.contato-funcao{font-size:16px;margin-bottom:4px}
+.contato-telefone{display:inline-block;color:inherit;text-decoration:none;font-size:18px;letter-spacing:.04em}
 .contato-telefone:hover{text-decoration:underline;text-underline-offset:5px}
 
 .btn{display:inline-block;padding:13px 36px;border:1px solid currentColor;text-decoration:none;
@@ -272,7 +272,7 @@ a{color:inherit}
   .rsvp{padding:clamp(60px,8vw,100px) 24px;overflow:hidden}
   .presentes{padding:clamp(44px,7vw,70px) 16px}
   .presentes .art-flor{width:72px}
-  .contato{padding:clamp(44px,7vw,70px) 24px}
+.contato{padding:28px 24px}
   .btn{padding:11px 24px;font-size:10px}
   body{padding-top:76px}
 }
@@ -999,6 +999,10 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 </svg></div>
 </section>
 
+<section class="foto-destaque reveal" aria-label="Foto de Julia e Guilherme">
+  <img src="/jueguilherme-prewedding-52.jpg" alt="Julia e Guilherme abraçados na praia">
+</section>
+
 <section class="contato reveal" id="contato" aria-labelledby="contato-titulo">
   <h2 id="contato-titulo">Contato</h2>
   <p class="contato-intro">Para qualquer informa&ccedil;&atilde;o ou em caso de d&uacute;vidas,<br>entre em contato com a nossa assessoria.</p>
@@ -1008,10 +1012,6 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
   <p class="contato-nome">Roberta Cunha</p>
   <p class="contato-funcao">Assessoria de casamento</p>
   <a class="contato-telefone" href="tel:+5521996434319" aria-label="Ligar para Roberta Cunha no n&uacute;mero 55 21 99643 4319">55 (21) 99643-4319</a>
-</section>
-
-<section class="foto-destaque reveal" aria-label="Foto de Julia e Guilherme">
-  <img src="/jueguilherme-prewedding-52.jpg" alt="Julia e Guilherme abraçados na praia">
 </section>
 
 <section class="presentes reveal" id="presentes" style="background-color:#EDDDCE !important;color:#5D664B">
@@ -1029,10 +1029,8 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 (function(){
   var presentes = document.querySelector('#presentes');
   var rsvp = document.querySelector('#rsvp');
-  var fotoAposRsvp = rsvp && rsvp.nextElementSibling;
   var carouselFinal = document.querySelector('.foto-retrato');
   if(presentes && rsvp) rsvp.parentNode.insertBefore(presentes, rsvp);
-  if(fotoAposRsvp && fotoAposRsvp.classList.contains('foto-destaque')) rsvp.parentNode.insertBefore(fotoAposRsvp, rsvp);
   if(carouselFinal) carouselFinal.remove();
 })();
 
