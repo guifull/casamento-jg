@@ -344,10 +344,21 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
   body{padding-top:0}
   .nav{
     background:transparent;
+    padding-left:6px;
+    padding-right:6px;
     border-bottom-color:transparent;
     box-shadow:none;
     transition:background-color .42s ease,box-shadow .42s ease,border-color .42s ease,padding .42s ease;
   }
+  .nav nav{width:100%}
+  .nav ul{
+    flex-wrap:nowrap;
+    align-items:center;
+    gap:clamp(5px,2vw,12px);
+    padding-left:0;
+    padding-right:0;
+  }
+  .nav li{min-width:0}
   .nav .logo-wrap{
     background:url('/monograma-relevo-mobile.png') center/115% auto no-repeat;
     transition:background-image .15s ease;
@@ -358,6 +369,10 @@ body{--paper-texture:url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
     transition:filter .42s ease,opacity .42s ease;
   }
   .nav a{
+    display:block;
+    white-space:nowrap;
+    font-size:clamp(7px,2.2vw,10px);
+    letter-spacing:clamp(.08em,.35vw,.16em);
     color:#b7baa6;
     text-shadow:-.35px -.35px 0 rgba(238,236,216,.48),.35px .35px 0 rgba(31,37,24,.62);
     transition:color .42s ease,text-shadow .42s ease,border-color .3s ease;
