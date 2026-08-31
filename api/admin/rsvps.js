@@ -9,18 +9,36 @@ module.exports = async function handler(req, res) {
   if (!adminSession(req)) return json(res, 401, { ok: false, message: 'Acesso não autorizado.' });
 
   try {
-    const select = encodeURIComponent('id,display_name,status,invitation_contacts(id,phone_encrypted,is_primary),guests(id,full_name,guest_type,display_order,active,rsvp_responses(attending,responded_at,updated_at,revision_number))');
-    const invitations = await supabase(`invitations?select=${select}&order=display_name.asc`);
+    // Fetch each table independently. Deep PostgREST embeds can omit a related
+    // response when relationship metadata changes or becomes ambiguous.
+    const invitationSelect = encodeURIComponent('id,display_name,status,invitation_contacts(id,phone_encrypted,is_primary)');
+    const guestSelect = encodeURIComponent('id,invitation_id,full_name,guest_type,display_order,active');
+    const responseSelect = encodeURIComponent('guest_id,attending,responded_at,updated_at,revision_number');
+    const [invitations, activeGuests, responses] = await Promise.all([
+      supabase(`invitations?select=${invitationSelect}&order=display_name.asc`),
+      supabase(`guests?select=${guestSelect}&active=eq.true&order=display_order.asc`),
+      supabase(`rsvp_responses?select=${responseSelect}`),
+    ]);
+
+    const guestsByInvitation = new Map();
+    for (const guest of activeGuests || []) {
+      const invitationGuests = guestsByInvitation.get(guest.invitation_id) || [];
+      invitationGuests.push(guest);
+      guestsByInvitation.set(guest.invitation_id, invitationGuests);
+    }
+
+    const responseByGuest = new Map(
+      (responses || []).map((response) => [response.guest_id, response]),
+    );
     const rows = (invitations || []).map((invitation) => ({
       id: invitation.id,
       name: invitation.display_name,
       status: invitation.status,
       phone: decryptPhone((invitation.invitation_contacts || []).find((contact) => contact.is_primary)?.phone_encrypted),
-      guests: (invitation.guests || [])
-        .filter((guest) => guest.active)
+      guests: (guestsByInvitation.get(invitation.id) || [])
         .sort((a, b) => a.display_order - b.display_order)
         .map((guest) => {
-          const response = guest.rsvp_responses?.[0] || null;
+          const response = responseByGuest.get(guest.id) || null;
           return {
             id: guest.id,
             name: guest.full_name,
