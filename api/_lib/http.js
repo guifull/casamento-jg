@@ -12,7 +12,7 @@ function setCors(req, res) {
     res.setHeader('Vary', 'Origin');
   }
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Idempotency-Key');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, DELETE, OPTIONS');
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
 }
