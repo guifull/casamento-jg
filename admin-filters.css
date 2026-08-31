@@ -1,0 +1,19 @@
+.metric.filterable {
+  cursor: pointer;
+  transition: border-color 150ms, box-shadow 150ms, transform 150ms;
+}
+
+.metric.filterable:hover {
+  border-color: var(--verde);
+  transform: translateY(-1px);
+}
+
+.metric.filterable.active {
+  border-color: var(--verde);
+  box-shadow: inset 0 0 0 2px var(--verde);
+}
+
+.metric.filterable:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 3px;
+}
